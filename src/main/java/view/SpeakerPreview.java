@@ -472,12 +472,19 @@ public class SpeakerPreview extends JDialog {
 			String sSistemaOperativo = System.getProperty("os.name");
 			if(sSistemaOperativo.startsWith("Mac")) {
 				if(sp.getNamePresentation() != null) {
-					String[] cmdArray = new String[2];
-					cmdArray[0] = PropertiesManager.getInstance().getProperty("powerpointRoute");
-					cmdArray[1] = "open "+PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+sp.getNamePresentation().substring(0,
-							sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation();
-					Runtime run = Runtime.getRuntime();
-					run.exec(cmdArray);
+					/*
+					 * String[] cmdArray = new String[2]; cmdArray[0] =
+					 * PropertiesManager.getInstance().getProperty("powerpointRoute"); cmdArray[1] =
+					 * "open "+PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+
+					 * sp.getNamePresentation().substring(0,
+					 * sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation(); Runtime
+					 * run = Runtime.getRuntime(); run.exec(cmdArray);
+					 */
+					
+					Runtime.getRuntime().exec(new String[] { "open", 
+							PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+
+									sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation()
+					});
 					
 					MarcadorEnVivo enVivo = new MarcadorEnVivo(sp.getId());
 					enVivo.run();
