@@ -481,10 +481,9 @@ public class SpeakerPreview extends JDialog {
 					 * run = Runtime.getRuntime(); run.exec(cmdArray);
 					 */
 					
-					Runtime.getRuntime().exec(new String[] { "open", 
-							PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+
-									sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation()
-					});
+					String rutaArchivo =PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation();
+					System.out.println("Abriendo -----------------"+rutaArchivo);
+					Runtime.getRuntime().exec(new String[] { "open", rutaArchivo });
 					
 					MarcadorEnVivo enVivo = new MarcadorEnVivo(sp.getId());
 					enVivo.run();
