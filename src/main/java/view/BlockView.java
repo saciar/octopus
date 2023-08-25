@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import org.apache.commons.lang3.StringUtils;
 
 import controller.EventManager;
+import controller.EventManager2;
 import idiomas.Idioma;
 import list.renderer.SpeakersListRenderer;
 import model.Speaker;
@@ -87,6 +88,7 @@ public class BlockView extends JDialog {
 		Idioma idioma = new Idioma(PropertiesManager.getInstance().getProperty("idioma"));
 		
 		getContentPane().setBackground(MyColors.COLOR_FONDO);
+		//setBounds(0, 0,1024,768);
 		setBounds(0, 0, Integer.parseInt(PropertiesManager.getInstance().getProperty("res_x")), Integer.parseInt(PropertiesManager.getInstance().getProperty("res_y")));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{10, 0};
@@ -302,6 +304,7 @@ public class BlockView extends JDialog {
 		cargarDatos(bloque);
 		
 	}
+	
 
 	private void rellenarLista(ArrayList<Speaker> speakers) {
 		DefaultListModel<SpeakerVo> modelo=new DefaultListModel<SpeakerVo>();
@@ -326,28 +329,5 @@ public class BlockView extends JDialog {
 		lblNombreBloque.setText(bloque.getNombre_bloque());
 	}
 	
-	private class Worker extends SwingWorker<Void, Void>{
-
-		@Override
-		protected Void doInBackground() throws Exception {
-			//progressBar.setVisible(true);
-			
-			//manager.getData();			
-			//data = manager.getRooms();
-			return null;
-		}
-
-		@Override
-		protected void done() {
-			//int indexTabSelected = tabbedPane.getSelectedIndex();
-			//tabbedPane.removeAll();
-			//rellenarTabla();
-			//if(indexTabSelected>0)
-			//	tabbedPane.setSelectedIndex(indexTabSelected);
-			//progressBar.setVisible(false);
-			//ssuper.done();
-		}
-		
-		
-	}
+	
 }

@@ -131,6 +131,7 @@ public class EventManager extends SwingWorker<Void, String>{
 									FileDownloader d = new FileDownloader(); 
 									d.setFileName(node.get("imagen").asText());
 									d.setSpeakerName(node.get("disertante").asText());
+									d.setId(node.get("id").asInt());
 									d.setFileUrl(PropertiesManager.getInstance().getProperty("server")+"/img/" + PropertiesManager.getInstance().getProperty("eventPrefix")+"/profile");
 									speaker.setPicture(d.getFileFrom().getAbsolutePath());
 
@@ -138,7 +139,7 @@ public class EventManager extends SwingWorker<Void, String>{
 									speaker.setPicture(EventManager.class.getResource("/user.png").getPath()); 
 								}
 
-								if(!node.get("qr").asText().equals("null")) { 
+								if(!node.get("qr").asText().equals("null") && !node.get("qr").asText().equals("")) { 
 									QrDownloader qrdown = new QrDownloader(); 
 									qrdown.setFileName(node.get("qr").asText());
 									qrdown.setSpeakerName(node.get("disertante").asText());

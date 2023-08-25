@@ -26,6 +26,7 @@ import javax.swing.table.JTableHeader;
 import org.apache.commons.lang3.StringUtils;
 
 import controller.EventManager;
+import controller.EventManager2;
 import idiomas.Idioma;
 import model.Date;
 import model.Room;
@@ -63,7 +64,7 @@ public class EventView extends JDialog {
 	
 	private ArrayList<Room> data;
 	
-	private EventManager manager;
+	private EventManager2 manager;
 	
 	private Timer timer;
 	private JProgressBar progressBar;
@@ -78,22 +79,6 @@ public class EventView extends JDialog {
 		this.isRunning = isRunning;
 	}
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EventView dialog = new EventView();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the dialog.
@@ -301,9 +286,12 @@ public class EventView extends JDialog {
 		gbc_panel_1.gridy = 3;
 		getContentPane().add(panel_1, gbc_panel_1);
 
+		
+		
 		cargarDatos();
 		getDataFromManager();
-		timer = new Timer(30000, new ActionListener() {
+		
+		timer = new Timer(10000, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -331,16 +319,7 @@ public class EventView extends JDialog {
 	
 	private synchronized void getDataFromManager() {
 		
-		//TAREA LARGA QUE TRAE LOS DATOS
-		//manager.getData();
-		//data = manager.getRooms();
-		
-		//TAREA DEL EVT
-		//rellenarTabla();
-		
-		//Worker worker = new Worker();
-		//worker.execute();
-		manager = new EventManager(this);
+		EventManager2 manager = new EventManager2(this);
 	}
 	
 	public void rellenarTabla() {

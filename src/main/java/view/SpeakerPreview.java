@@ -481,10 +481,12 @@ public class SpeakerPreview extends JDialog {
 					 * run = Runtime.getRuntime(); run.exec(cmdArray);
 					 */
 					
-					String rutaArchivo =PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/"+sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation();
+					String rutaArchivo =PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/presentations/"+sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation();
 					System.out.println("Abriendooo -----------------"+rutaArchivo);
+					if (sp.getExtension().equals(".key")) {
+						Runtime.getRuntime().exec(new String[] {"osascript", "/Users/congressrental/Desktop/script.scpt",rutaArchivo });
+					}
 					
-					Runtime.getRuntime().exec(new String[] {"osascript", "/Users/congressrental/Desktop/script.scpt",rutaArchivo });
 					
 					//Runtime.getRuntime().exec("open osascript /Users/congressrental/Desktop/script.scpt "+rutaArchivo );
 					
@@ -495,9 +497,10 @@ public class SpeakerPreview extends JDialog {
 			}
 			else {
 				if (sp.getNamePresentation() != null) {
-					String path = PropertiesManager.getInstance().getProperty("data") + "/Octopus/data/"
-							+ sp.getNamePresentation().substring(0, sp.getNamePresentation().indexOf(".")) + "/"
-							+ sp.getNamePresentation();
+					//String path = PropertiesManager.getInstance().getProperty("data") + "/Octopus/data/presentations/"
+					//		+ sp.getNamePresentation().substring(0, sp.getNamePresentation().indexOf(".")) + "/"
+					//		+ sp.getNamePresentation();
+					String path = PropertiesManager.getInstance().getProperty("data") + "/Octopus/data/presentations/"+sp.getId()+"/"+sp.getIdPresenation()+sp.getExtension();
 					Runtime run = Runtime.getRuntime();
 					if (sp.getExtension().equals(".pptx")) {
 						run.exec(PropertiesManager.getInstance().getProperty("powerpointRoute") + " /S " + path);

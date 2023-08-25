@@ -63,7 +63,12 @@ public class SpeakersListRenderer<E> extends JPanel implements ListCellRenderer<
 		lblNombre.setFont(new MyFont(MyFont.BOLD).getFont(18f));
 		if(((SpeakerVo)value).getNombre_charla()==null)
 			lblNombrePresentacion.setText(" ");
-		else lblNombrePresentacion.setText(((SpeakerVo)value).getNombre_charla());
+		else {
+			lblNombrePresentacion.setText(((SpeakerVo)value).getNombre_charla());
+			if(((SpeakerVo)value).getSpeaker().getExtension() != null) {
+				lblNombrePresentacion.setText(lblNombrePresentacion.getText()+" ("+((SpeakerVo)value).getSpeaker().getExtension().substring(1)+")");
+			}
+		}
 		lblNombrePresentacion.setForeground(MyColors.COLOR_BORDE);
 		lblNombrePresentacion.setBackground(Color.WHITE);
 		lblNombrePresentacion.setFont(new MyFont(MyFont.LIGHT).getFont(16f));
