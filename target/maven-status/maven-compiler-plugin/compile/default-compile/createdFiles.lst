@@ -10,6 +10,7 @@ table\model\BlockTableModel.class
 view\Settings$2.class
 view\Settings.class
 utils\MyConstant.class
+view\Settings$9.class
 view\BlockView$3.class
 view\BlockView.class
 model\Speaker.class
