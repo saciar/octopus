@@ -481,7 +481,7 @@ public class SpeakerPreview extends JDialog {
 					 * run = Runtime.getRuntime(); run.exec(cmdArray);
 					 */
 					
-					String rutaArchivo =PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/presentations/"+sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getNamePresentation();
+					String rutaArchivo =PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/presentations/"+sp.getNamePresentation().substring(0,sp.getNamePresentation().indexOf("."))+"/"+sp.getIdPresenation()+sp.getExtension();
 					System.out.println("Abriendooo -----------------"+rutaArchivo);
 					if (sp.getExtension().equals(".key")) {
 						Runtime.getRuntime().exec(new String[] {"osascript", PropertiesManager.getInstance().getProperty("script")+"/script.scpt",rutaArchivo });
