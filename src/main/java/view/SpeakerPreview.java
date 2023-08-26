@@ -491,7 +491,7 @@ public class SpeakerPreview extends JDialog {
 					//Runtime.getRuntime().exec("open osascript /Users/congressrental/Desktop/script.scpt "+rutaArchivo );
 					
 					MarcadorEnVivo enVivo = new MarcadorEnVivo(sp.getId());
-					enVivo.run();
+					enVivo.run(); 
 				}
 				
 			}
