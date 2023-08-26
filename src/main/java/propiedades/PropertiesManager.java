@@ -8,6 +8,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Properties;
@@ -32,7 +34,7 @@ public class PropertiesManager {
 		try {
 			properties = new Properties();
 			properties.load(new FileReader("config.properties"));
-			//properties.load(getClass().getResourceAsStream("config.properties"));
+			//properties.load(getClass().getResourceAsStream("/config/config.properties"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,6 +44,7 @@ public class PropertiesManager {
 	public void setProperties(HashMap<String, String> p) {
 		try {
 			OutputStream out = new FileOutputStream("config.properties");
+			//OutputStream out= new FileOutputStream(getClass().getResource("/config/config.properties").getFile());
 			for (Entry<String, String> property : p.entrySet()) {
 				properties.setProperty(property.getKey(), property.getValue());
 			}
@@ -59,7 +62,7 @@ public class PropertiesManager {
 	public String getProperty(String prop) {
 		try {
 			properties.load(new FileReader("config.properties"));
-			//properties.load(PropertiesManager.class.getResourceAsStream("config.properties"));
+			//properties.load(PropertiesManager.class.getResourceAsStream("/config/config.properties"));
 			return properties.getProperty(prop);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -77,6 +80,7 @@ public class PropertiesManager {
 		
 		try {
 			String ruta = "config.properties";
+			//URL ruta = getClass().getResource("config/config.properties");
 			File file = new File(ruta);
 
 			String contenidoNombreEvento = "eventName=";
@@ -92,8 +96,9 @@ public class PropertiesManager {
             String contenidoAdminPass = "adminPass=octo";
             String contenidoDataPath= "data=";
             String contenidoServerStorage = "server_storage=https://storageoctopus.online";
-			String res_x = "1280";
-			String res_y = "720";
+			String res_x = "res_x=1280";
+			String res_y = "res_y=720";
+			String script_mac = "script=";
 			if (!file.exists()) {	
 				
 				file.createNewFile();			
@@ -128,13 +133,15 @@ public class PropertiesManager {
                 bw.write(res_x);
                 bw.newLine();
                 bw.write(res_y);
+                bw.newLine();
+                bw.write(script_mac);
                 bw.close();
                 fw.close();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	

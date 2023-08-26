@@ -69,6 +69,7 @@ public class Settings extends JDialog {
 	private JLabel lblVideoPath;
 	private JLabel lblPptPath;
 	private JLabel lblDataPath;
+	private JLabel lblScriptPath;
 
 	/**
 	 * Launch the application.
@@ -154,9 +155,9 @@ public class Settings extends JDialog {
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{10, 0, 0, 0, 10, 0};
-		gbl_panel_1.rowHeights = new int[]{30, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{30, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		JLabel lblNombreEvento = new JLabel(idioma.getProperty("conf-nombre-evento"));
@@ -415,7 +416,7 @@ public class Settings extends JDialog {
 		lblData.setForeground(MyColors.COLOR_AZUL);
 		GridBagConstraints gbc_lblData = new GridBagConstraints();
 		gbc_lblData.anchor = GridBagConstraints.WEST;
-		gbc_lblData.insets = new Insets(0, 0, 0, 5);
+		gbc_lblData.insets = new Insets(0, 0, 5, 5);
 		gbc_lblData.gridx = 1;
 		gbc_lblData.gridy = 17;
 		panel_1.add(lblData, gbc_lblData);
@@ -425,7 +426,7 @@ public class Settings extends JDialog {
 		lblDataPath.setForeground(MyColors.COLOR_BORDE);
 		GridBagConstraints gbc_lblDataPath = new GridBagConstraints();
 		gbc_lblDataPath.anchor = GridBagConstraints.WEST;
-		gbc_lblDataPath.insets = new Insets(0, 0, 0, 5);
+		gbc_lblDataPath.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDataPath.gridx = 2;
 		gbc_lblDataPath.gridy = 17;
 		panel_1.add(lblDataPath, gbc_lblDataPath);
@@ -445,10 +446,49 @@ public class Settings extends JDialog {
 			}
 		});
 		GridBagConstraints gbc_btnData = new GridBagConstraints();
-		gbc_btnData.insets = new Insets(0, 0, 0, 5);
+		gbc_btnData.insets = new Insets(0, 0, 5, 5);
 		gbc_btnData.gridx = 3;
 		gbc_btnData.gridy = 17;
 		panel_1.add(btnData, gbc_btnData);
+		
+		JLabel lblScript = new JLabel(idioma.getProperty("conf-script"));
+		lblScript.setForeground(new Color(33, 64, 128));
+		lblScript.setFont(new Font("Nunito Sans Light", Font.PLAIN, 20));
+		GridBagConstraints gbc_lblScript = new GridBagConstraints();
+		gbc_lblScript.anchor = GridBagConstraints.WEST;
+		gbc_lblScript.insets = new Insets(0, 0, 5, 5);
+		gbc_lblScript.gridx = 1;
+		gbc_lblScript.gridy = 19;
+		panel_1.add(lblScript, gbc_lblScript);
+		
+		lblScriptPath = new JLabel("");
+		lblScriptPath.setForeground(new Color(106, 106, 106));
+		lblScriptPath.setFont(new Font("Nunito Sans Light", Font.PLAIN, 14));
+		GridBagConstraints gbc_lblScriptPath = new GridBagConstraints();
+		gbc_lblScriptPath.insets = new Insets(0, 0, 5, 5);
+		gbc_lblScriptPath.gridx = 2;
+		gbc_lblScriptPath.gridy = 19;
+		panel_1.add(lblScriptPath, gbc_lblScriptPath);
+		
+		JButton btnScript = new JButton(idioma.getProperty("conf-btn-script"));
+		btnScript.setForeground(MyColors.COLOR_AZUL);
+		btnScript.setFont(fuenteBotones);
+		btnScript.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser chooser = new JFileChooser(lblScriptPath.getText());
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+				int valor = chooser.showOpenDialog(chooser);
+				if (valor == JFileChooser.APPROVE_OPTION) {
+					String ruta = chooser.getSelectedFile().getAbsolutePath();
+					lblScriptPath.setText(ruta);
+				}
+			}
+		});
+		GridBagConstraints gbc_btnScript = new GridBagConstraints();
+		gbc_btnScript.insets = new Insets(0, 0, 5, 5);
+		gbc_btnScript.gridx = 3;
+		gbc_btnScript.gridy = 19;
+		panel_1.add(btnScript, gbc_btnScript);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(MyColors.COLOR_AZUL);
@@ -511,7 +551,8 @@ public class Settings extends JDialog {
 		txtServerPrefix.setText(PropertiesManager.getInstance().getProperty("eventPrefix"));
 		txtNombreEvento.setText(PropertiesManager.getInstance().getProperty("eventName"));
 		lblDataPath.setText(PropertiesManager.getInstance().getProperty("data"));
-
+		lblScriptPath.setText(PropertiesManager.getInstance().getProperty("script"));
+		
 		if(!StringUtils.isBlank(PropertiesManager.getInstance().getProperty("logo"))) {
 			lblLogoPath.setText(PropertiesManager.getInstance().getProperty("logo"));
 			//Image img = new ImageIcon(PropertiesManager.getInstance().getProperty("logo")).getImage();		
@@ -544,6 +585,7 @@ public class Settings extends JDialog {
 		ourHashmap.put("eventPrefix", txtServerPrefix.getText());
 		ourHashmap.put("eventName", txtNombreEvento.getText());
 		ourHashmap.put("data", lblDataPath.getText());
+		ourHashmap.put("script", lblScriptPath.getText());
 		
 		PropertiesManager.getInstance().setProperties(ourHashmap);
 	}
