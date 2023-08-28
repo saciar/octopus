@@ -95,7 +95,7 @@ public class Settings extends JDialog {
 	 */
 	public Settings() {
 		setUndecorated(true);
-		setBounds(100, 100, 559, 647);
+		setBounds(100, 100, 700, 647);
 		setLocationRelativeTo(null);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
