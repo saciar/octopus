@@ -221,6 +221,10 @@ public class EventManager2 extends SwingWorker<Void, String>{
 		}
 	}
 
+	private void setEventImage() {
+		
+	}
+	
 	private void setSpeakers(Iterator<JsonNode> speakersIterator, ArrayList<Speaker> speakersList) {
 		int cantleidos= 0;
 		while(speakersIterator.hasNext()) { 

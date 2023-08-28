@@ -17,6 +17,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import idiomas.Idioma;
+import model.Event;
 import model.Room;
 import propiedades.PropertiesManager;
 import utils.MyColors;
@@ -34,14 +35,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
+import controller.EventNameManager;
+import controller.EventPictureDownloader;
 import controller.SalasManager;
 
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -265,6 +270,24 @@ public class Settings extends JDialog {
 		panel_1.add(txtServer, gbc_txtServer);
 		txtServer.setColumns(10);
 		
+		JButton btnConect = new JButton("conect");
+		btnConect.setForeground(MyColors.COLOR_AZUL);
+		btnConect.setFont(fuenteBotones);
+		btnConect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!txtServer.getText().isBlank() && !txtServerPrefix.getText().isBlank()) {
+					cargarEvento();
+					if(!txtNombreEvento.getText().isBlank() && cmbSalas.getItemCount() == 1)
+						cargarSalas();					
+				}
+			}
+		});
+		GridBagConstraints gbc_btnConect = new GridBagConstraints();
+		gbc_btnConect.insets = new Insets(0, 0, 5, 5);
+		gbc_btnConect.gridx = 3;
+		gbc_btnConect.gridy = 7;
+		panel_1.add(btnConect, gbc_btnConect);
+		
 		JLabel lblServerPrefix = new JLabel(idioma.getProperty("conf-codigo-evento"));
 		lblServerPrefix.setFont(fuenteLabel);
 		lblServerPrefix.setForeground(MyColors.COLOR_AZUL);
@@ -452,8 +475,8 @@ public class Settings extends JDialog {
 		panel_1.add(btnData, gbc_btnData);
 		
 		JLabel lblScript = new JLabel(idioma.getProperty("conf-script"));
-		lblScript.setForeground(new Color(33, 64, 128));
-		lblScript.setFont(new Font("Nunito Sans Light", Font.PLAIN, 20));
+		lblScript.setForeground(MyColors.COLOR_AZUL);
+		lblScript.setFont(fuenteLabel);
 		GridBagConstraints gbc_lblScript = new GridBagConstraints();
 		gbc_lblScript.anchor = GridBagConstraints.WEST;
 		gbc_lblScript.insets = new Insets(0, 0, 5, 5);
@@ -462,9 +485,10 @@ public class Settings extends JDialog {
 		panel_1.add(lblScript, gbc_lblScript);
 		
 		lblScriptPath = new JLabel("");
-		lblScriptPath.setForeground(new Color(106, 106, 106));
-		lblScriptPath.setFont(new Font("Nunito Sans Light", Font.PLAIN, 14));
+		lblScriptPath.setForeground(MyColors.COLOR_BORDE);
+		lblScriptPath.setFont(fuenteRutas);
 		GridBagConstraints gbc_lblScriptPath = new GridBagConstraints();
+		gbc_lblScriptPath.anchor = GridBagConstraints.WEST;
 		gbc_lblScriptPath.insets = new Insets(0, 0, 5, 5);
 		gbc_lblScriptPath.gridx = 2;
 		gbc_lblScriptPath.gridy = 19;
@@ -515,9 +539,31 @@ public class Settings extends JDialog {
 		});
 		panel_2.add(btnCancelar);
 		
-		cargarSalas();
-		cargarOpciones();
+		//cargarSalas();
+		//cargarOpciones();
 
+	}
+	
+	private void cargarEvento() {
+		EventNameManager manager = new EventNameManager();
+		Event ev = manager.getEventData(txtServer.getText(), txtServerPrefix.getText());
+		if(ev !=null) {
+			txtNombreEvento.setText(ev.getName());
+			EventPictureDownloader dp = new EventPictureDownloader();
+			dp.setFileName(ev.getLogo());
+			File dest;
+			try {
+				dest = dp.downloadImage();
+				lblLogoPath.setText(dest.getAbsolutePath());
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 
 	private void cargarSalas() {

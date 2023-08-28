@@ -1,6 +1,7 @@
 view\SpeakerPreview.class
 vo\BloqueVo.class
 controller\EventManager.class
+controller\EventPictureDownloader.class
 view\SpeakerPreview$2.class
 utils\MyColors.class
 view\EventView$3.class
@@ -40,10 +41,12 @@ view\Password$2.class
 utils\MyFont.class
 propiedades\PropertiesManager.class
 view\Password.class
+view\Settings$10.class
 view\Portada$2.class
 view\ErrorDialog$1.class
 controller\BlockManager.class
 controller\SponsorDownloader.class
+model\Event.class
 controller\ReadJson.class
 controller\QrDownloader.class
 idiomas\Idioma.class
