@@ -372,7 +372,7 @@ public class EventManager2 extends SwingWorker<Void, String>{
 		// TODO Auto-generated method stub
 		//view.getLblNombreEvento().setText(chunks.get(chunks.size()-1));
 		
-		view.getProgressBar().setString(chunks.get(chunks.size()-1));
+		//view.getProgressBar().setString(chunks.get(chunks.size()-1));
 	}
 
 

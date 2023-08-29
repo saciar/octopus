@@ -90,8 +90,8 @@ public class EventView extends JDialog {
 		this.setModal(true);
 
 		getContentPane().setBackground(MyColors.COLOR_FONDO);
-		//setBounds(0, 0, Integer.parseInt(PropertiesManager.getInstance().getProperty("res_x")), Integer.parseInt(PropertiesManager.getInstance().getProperty("res_y")));
-		setBounds(0, 0,1280, 720);
+		setBounds(0, 0, Integer.parseInt(PropertiesManager.getInstance().getProperty("res_x")), Integer.parseInt(PropertiesManager.getInstance().getProperty("res_y")));
+		//setBounds(0, 0,1280, 720);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{100, 0, 0, 10, 0};
