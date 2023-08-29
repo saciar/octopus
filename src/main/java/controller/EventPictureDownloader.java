@@ -14,16 +14,9 @@ public class EventPictureDownloader {
 private static final String TO_FOLDER = PropertiesManager.getInstance().getProperty("data")+"/Octopus/data/";
 	
 	private String fileName;
-	private String fileUrl = PropertiesManager.getInstance().getProperty("server") + "/img/logos/";
-	private int id;
+	private String fileUrl; //= PropertiesManager.getInstance().getProperty("server") + "/img/logos/";
+	private String server ;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public String getFileUrl() {
 		return fileUrl;
@@ -40,50 +33,29 @@ private static final String TO_FOLDER = PropertiesManager.getInstance().getPrope
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}	
+	
+	public String getServer() {
+		return server;
+	}
 
-	
-	/*
-	 * public File downloadImage() {
-	 * 
-	 * try {
-	 * 
-	 * File dir_complex = new File(TO_FOLDER+"/"+id); if (!dir_complex.exists()) {
-	 * if (!dir_complex.mkdirs()) return null; }
-	 * 
-	 * 
-	 * 
-	 * File destFile = new File(TO_FOLDER + id
-	 * +"/"+id+fileName.substring(fileName.indexOf("."), fileName.length()));
-	 * 
-	 * URLConnection conn = new URL(fileUrl+"/"+fileName).openConnection();
-	 * conn.connect();
-	 * 
-	 * InputStream in = conn.getInputStream(); OutputStream out = new
-	 * FileOutputStream(destFile);
-	 * 
-	 * int b = 0; while (b != -1) { b = in.read(); if (b != -1) out.write(b); }
-	 * 
-	 * out.close(); in.close(); return destFile; } catch (MalformedURLException e) {
-	 * System.out.println("la url: " + fileUrl + " no es valida!"); } catch
-	 * (IOException e) { e.printStackTrace(); return null; }
-	 * 
-	 * return null; }
-	 */
-	
+	public void setServer(String server) {
+		this.server = server;
+	}
+
 	public File downloadImage() throws MalformedURLException, IOException {
 		//try {
 			
-			File dir = new File(TO_FOLDER+"/");
+			File dir = new File(fileUrl);
 			if (!dir.exists()) {
 				if (!dir.mkdirs())
 					return null;
 			}
 
 			//File destFile = new File(TO_FOLDER + speakerName.substring(speakerName.lastIndexOf(" ")+1,speakerName.length())+fileName.substring(fileName.indexOf("."), fileName.length()));
-			File destFile = new File(TO_FOLDER + fileName.substring(fileName.indexOf("."), fileName.length()));
+			File destFile = new File(fileUrl + "/" +fileName);
 			if(!destFile.exists()) {
 				System.out.println("Descargando imagen evento ");
-				FileUtils.copyURLToFile(new URL(fileUrl+"/"+fileName), destFile);				
+				FileUtils.copyURLToFile(new URL(server+"/"+fileName), destFile);				
 			}
 			return destFile;
 		/*}

@@ -270,7 +270,7 @@ public class Settings extends JDialog {
 		panel_1.add(txtServer, gbc_txtServer);
 		txtServer.setColumns(10);
 		
-		JButton btnConect = new JButton("conect");
+		JButton btnConect = new JButton(idioma.getProperty("conf-btn-conectar"));
 		btnConect.setForeground(MyColors.COLOR_AZUL);
 		btnConect.setFont(fuenteBotones);
 		btnConect.addActionListener(new ActionListener() {
@@ -539,8 +539,8 @@ public class Settings extends JDialog {
 		});
 		panel_2.add(btnCancelar);
 		
-		//cargarSalas();
-		//cargarOpciones();
+		cargarSalas();
+		cargarOpciones();
 
 	}
 	
@@ -550,7 +550,9 @@ public class Settings extends JDialog {
 		if(ev !=null) {
 			txtNombreEvento.setText(ev.getName());
 			EventPictureDownloader dp = new EventPictureDownloader();
+			dp.setFileUrl(lblDataPath.getText()+"/Octopus/data/");
 			dp.setFileName(ev.getLogo());
+			dp.setServer(txtServer.getText()+ "/img/logos/");
 			File dest;
 			try {
 				dest = dp.downloadImage();
