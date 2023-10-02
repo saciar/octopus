@@ -224,7 +224,7 @@ public class BlockView extends JDialog {
 		rellenarLista(bloque.getSpeakers());
 		list.setCellRenderer(new SpeakersListRenderer<>());
 		list.addMouseListener(new MouseAdapter() {
-			public void mouseClicked(MouseEvent evt) {
+			/*public void mouseClicked(MouseEvent evt) {
 				JList<SpeakerVo> list = (JList<SpeakerVo>)evt.getSource();
 				if (evt.getClickCount() == 2) { 
 					int index = list.locationToIndex(evt.getPoint());
@@ -234,7 +234,18 @@ public class BlockView extends JDialog {
 					dialog.setVisible(true);
 				}
 
+			}*/
+			public void mouseReleased(MouseEvent evt) {
+				JList<SpeakerVo> list = (JList<SpeakerVo>)evt.getSource();
+				//if (evt.getClickCount() == 2) { 
+					int index = list.locationToIndex(evt.getPoint());
+					SpeakerVo s = list.getModel().getElementAt(index);
+					SpeakerPreview dialog = new SpeakerPreview(s);
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				//}
 			}
+			
 		});
 		scrollPane.setViewportView(list);
 		

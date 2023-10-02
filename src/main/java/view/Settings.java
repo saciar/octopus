@@ -75,6 +75,8 @@ public class Settings extends JDialog {
 	private JLabel lblPptPath;
 	private JLabel lblDataPath;
 	private JLabel lblScriptPath;
+	private JTextField txtX;
+	private JTextField txtY;
 
 	/**
 	 * Launch the application.
@@ -100,7 +102,8 @@ public class Settings extends JDialog {
 	 */
 	public Settings() {
 		setUndecorated(true);
-		setBounds(100, 100, 700, 647);
+		//setBounds(100, 100, 700, 647);
+		setBounds(0, 0, 1024, 720);
 		setLocationRelativeTo(null);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout(0, 0));
@@ -160,9 +163,9 @@ public class Settings extends JDialog {
 		getContentPane().add(panel_1, BorderLayout.CENTER);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[]{10, 0, 0, 0, 10, 0};
-		gbl_panel_1.rowHeights = new int[]{30, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.rowHeights = new int[]{30, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
 		JLabel lblNombreEvento = new JLabel(idioma.getProperty("conf-nombre-evento"));
@@ -514,6 +517,46 @@ public class Settings extends JDialog {
 		gbc_btnScript.gridy = 19;
 		panel_1.add(btnScript, gbc_btnScript);
 		
+		JLabel lblX = new JLabel(idioma.getProperty("conf_res_x"));
+		lblX.setForeground(MyColors.COLOR_AZUL);
+		lblX.setFont(fuenteLabel);
+		GridBagConstraints gbc_lblX = new GridBagConstraints();
+		gbc_lblX.anchor = GridBagConstraints.WEST;
+		gbc_lblX.insets = new Insets(0, 0, 5, 5);
+		gbc_lblX.gridx = 1;
+		gbc_lblX.gridy = 21;
+		panel_1.add(lblX, gbc_lblX);
+		
+		txtX = new JTextField();
+		txtX.setFont(fuenteTextfield);
+		GridBagConstraints gbc_txtX = new GridBagConstraints();
+		gbc_txtX.insets = new Insets(0, 0, 5, 5);
+		gbc_txtX.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtX.gridx = 2;
+		gbc_txtX.gridy = 21;
+		panel_1.add(txtX, gbc_txtX);
+		txtX.setColumns(10);
+		
+		JLabel lblY =new JLabel(idioma.getProperty("conf_res_y"));
+		lblY.setForeground(MyColors.COLOR_AZUL);
+		lblY.setFont(fuenteLabel);
+		GridBagConstraints gbc_lblY = new GridBagConstraints();
+		gbc_lblY.anchor = GridBagConstraints.WEST;
+		gbc_lblY.insets = new Insets(0, 0, 5, 5);
+		gbc_lblY.gridx = 1;
+		gbc_lblY.gridy = 23;
+		panel_1.add(lblY, gbc_lblY);
+		
+		txtY = new JTextField();
+		txtY.setFont(fuenteTextfield);
+		GridBagConstraints gbc_txtY = new GridBagConstraints();
+		gbc_txtY.insets = new Insets(0, 0, 5, 5);
+		gbc_txtY.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtY.gridx = 2;
+		gbc_txtY.gridy = 23;
+		panel_1.add(txtY, gbc_txtY);
+		txtY.setColumns(10);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(MyColors.COLOR_AZUL);
 		getContentPane().add(panel_2, BorderLayout.SOUTH);
@@ -600,6 +643,8 @@ public class Settings extends JDialog {
 		txtNombreEvento.setText(PropertiesManager.getInstance().getProperty("eventName"));
 		lblDataPath.setText(PropertiesManager.getInstance().getProperty("data"));
 		lblScriptPath.setText(PropertiesManager.getInstance().getProperty("script"));
+		txtX.setText(PropertiesManager.getInstance().getProperty("res_x"));
+		txtY.setText(PropertiesManager.getInstance().getProperty("res_y"));
 		
 		if(!StringUtils.isBlank(PropertiesManager.getInstance().getProperty("logo"))) {
 			lblLogoPath.setText(PropertiesManager.getInstance().getProperty("logo"));
@@ -634,7 +679,8 @@ public class Settings extends JDialog {
 		ourHashmap.put("eventName", txtNombreEvento.getText());
 		ourHashmap.put("data", lblDataPath.getText());
 		ourHashmap.put("script", lblScriptPath.getText());
-		
+		ourHashmap.put("res_x", txtX.getText());
+		ourHashmap.put("res_y", txtY.getText());
 		PropertiesManager.getInstance().setProperties(ourHashmap);
 	}
 

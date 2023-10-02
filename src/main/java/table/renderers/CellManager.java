@@ -2,6 +2,7 @@ package table.renderers;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 
@@ -22,12 +23,12 @@ public class CellManager extends DefaultTableCellRenderer {
 	private String tipo="text";
 
 	 //se definen por defecto los tipos de datos a usar
-	 private Font normal = new MyFont(MyFont.LIGHT).getFont(18f);
+	 private Font normal = new MyFont(MyFont.LIGHT).getFont(24f);
 	 private Font bold = new MyFont(MyFont.BOLD).getFont(18f);
 	 //etiqueta que almacenará el icono a mostrar
 	 private JLabel label = new JLabel();
 	 //iconos disponibles para ser mostrados en la etiqueta dependiendo de la columna que lo contenga
-	 private ImageIcon iconoGo = new ImageIcon(getClass().getResource("/img/12px/init.png"));
+	 private ImageIcon iconoGo = new ImageIcon(getClass().getResource("/img/24px/init.png"));
 
 
 	 public CellManager(){
@@ -85,6 +86,7 @@ public class CellManager extends DefaultTableCellRenderer {
 			 this.setText( (String) value );
 			 this.setForeground( (selected)? new Color(255,255,255) :MyColors.COLOR_BORDE );   
 			 this.setBackground( (selected)? colorFondo :Color.WHITE); 
+			 
 			 this.setFont(normal);   
 			 return this;
 		 }

@@ -335,7 +335,6 @@ public class EventView extends JDialog {
 				BlockTableModel model = new BlockTableModel();
 				model.setBloques(consultarListaBloques(date));
 				tblBlocks.setModel(model);				
-				
 				construirTabla(tblBlocks);
 				
 				scrollPane.setViewportView(tblBlocks);
@@ -410,6 +409,8 @@ public class EventView extends JDialog {
 		//tblBlocks.getColumnModel().getColumn(MyConstant.SPEAKERS).setPreferredWidth(10);
 		tblBlocks.getColumnModel().getColumn(MyConstant.GO).setPreferredWidth(10);//accion ir
 
+		tblBlocks.setRowHeight(50);
+		
 		//personaliza el encabezado 
 		JTableHeader jtableHeader =	tblBlocks.getTableHeader(); 
 		jtableHeader.setDefaultRenderer(new HeaderTableManager()); 
